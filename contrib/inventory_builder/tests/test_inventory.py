@@ -12,7 +12,6 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-import inventory
 import mock
 import unittest
 
@@ -23,7 +22,7 @@ path = "./contrib/inventory_builder/"
 if path not in sys.path:
     sys.path.append(path)
 
-import inventory  # noqa
+import inventory
 
 
 class TestInventory(unittest.TestCase):
@@ -44,8 +43,8 @@ class TestInventory(unittest.TestCase):
 
     def test_get_ip_from_opts_invalid(self):
         optstring = "notanaddr=value something random!chars:D"
-        self.assertRaisesRegex(ValueError, "IP parameter not found",
-                               self.inv.get_ip_from_opts, optstring)
+        self.assertRaisesRegexp(ValueError, "IP parameter not found",
+                                self.inv.get_ip_from_opts, optstring)
 
     def test_ensure_required_groups(self):
         groups = ['group1', 'group2']
@@ -64,8 +63,8 @@ class TestInventory(unittest.TestCase):
     def test_get_host_id_invalid(self):
         bad_hostnames = ['node', 'no99de', '01node', 'node.111111']
         for hostname in bad_hostnames:
-            self.assertRaisesRegex(ValueError, "Host name must end in an",
-                                   self.inv.get_host_id, hostname)
+            self.assertRaisesRegexp(ValueError, "Host name must end in an",
+                                    self.inv.get_host_id, hostname)
 
     def test_build_hostnames_add_one(self):
         changed_hosts = ['10.90.0.2']
@@ -193,8 +192,8 @@ class TestInventory(unittest.TestCase):
             ('node2', {'ansible_host': '10.90.0.3',
                        'ip': '10.90.0.3',
                        'access_ip': '10.90.0.3'})])
-        self.assertRaisesRegex(ValueError, "Unable to find host",
-                               self.inv.delete_host_by_ip, existing_hosts, ip)
+        self.assertRaisesRegexp(ValueError, "Unable to find host",
+                                self.inv.delete_host_by_ip, existing_hosts, ip)
 
     def test_purge_invalid_hosts(self):
         proper_hostnames = ['node1', 'node2']
@@ -310,8 +309,8 @@ class TestInventory(unittest.TestCase):
 
     def test_range2ips_incorrect_range(self):
         host_range = ['10.90.0.4-a.9b.c.e']
-        self.assertRaisesRegex(Exception, "Range of ip_addresses isn't valid",
-                               self.inv.range2ips, host_range)
+        self.assertRaisesRegexp(Exception, "Range of ip_addresses isn't valid",
+                                self.inv.range2ips, host_range)
 
     def test_build_hostnames_different_ips_add_one(self):
         changed_hosts = ['10.90.0.2,192.168.0.2']

@@ -41,7 +41,7 @@
     state: file
 
 - name: prep_kubeadm_images | Generate list of required images
-  shell: "{{ bin_dir }}/kubeadm config images list --config={{ kube_config_dir }}/kubeadm-images.yaml | grep -v coredns"
+  command: "{{ bin_dir }}/kubeadm config images list --config={{ kube_config_dir }}/kubeadm-images.yaml"
   register: kubeadm_images_raw
   run_once: true
   changed_when: false
@@ -57,8 +57,8 @@
       value:
         enabled: true
         container: true
-        repo: "{{ item | regex_replace('^(.*):.*$','\\1') }}"
-        tag: "{{ item | regex_replace('^.*:(.*)$','\\1') }}"
+        repo: "{{ item.split(':')[0] }}"
+        tag: "{{ item.split(':')[1] }}"
         groups: k8s-cluster
   loop: "{{ kubeadm_images_list | flatten(levels=1) }}"
   register: kubeadm_images_cooked

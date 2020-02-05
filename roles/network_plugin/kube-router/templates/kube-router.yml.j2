@@ -10,7 +10,6 @@ data:
   cni-conf.json: |
     {
       "name":"kubernetes",
-      "cniVersion": "0.2.0",
       "type":"bridge",
       "bridge":"kube-bridge",
       "isDefaultGateway":true,
@@ -42,7 +41,7 @@ data:
     current-context: kube-router-context
 
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   labels:
@@ -56,17 +55,15 @@ spec:
     rollingUpdate:
       maxUnavailable: 1
     type: RollingUpdate
-  selector:
-    matchLabels:
-      k8s-app: kube-router
-      tier: node
   template:
     metadata:
       labels:
         k8s-app: kube-router
         tier: node
     spec:
+{% if kube_version is version('v1.11.1', '>=') %}
       priorityClassName: system-cluster-critical
+{% endif %}
       serviceAccountName: kube-router
       containers:
       - name: kube-router

@@ -13,7 +13,7 @@ disabled_plugins = ["restart"]
 
 [plugins.linux]
   shim = "/usr/bin/containerd-shim"
-  runtime = "{{ runc_binary }}"
+  runtime = "/usr/sbin/runc"
 
 [plugins.cri]
   stream_server_address = "127.0.0.1"

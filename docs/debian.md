@@ -1,14 +1,15 @@
-# Debian Jessie
+Debian Jessie
+===============
 
 Debian Jessie installation Notes:
 
-- Add
+- Add 
   
   ```GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"```
   
   to /etc/default/grub. Then update with
   
-  ```ShellSession
+  ```
    sudo update-grub
    sudo update-grub2
    sudo reboot
@@ -22,7 +23,7 @@ Debian Jessie installation Notes:
   
 - Add the Ansible repository and install Ansible to get a proper version
 
-  ```ShellSession
+  ```
   sudo add-apt-repository ppa:ansible/ansible
   sudo apt-get update
   sudo apt-get install ansible
@@ -32,5 +33,6 @@ Debian Jessie installation Notes:
 - Install Jinja2 and Python-Netaddr
 
   ```sudo apt-get install python-jinja2=2.8-1~bpo8+1 python-netaddr```
+  
   
 Now you can continue with [Preparing your deployment](getting-started.md#starting-custom-deployment)

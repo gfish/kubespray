@@ -10,7 +10,6 @@ kube_proxy_mode: iptables
 kube_network_plugin: flannel
 helm_enabled: true
 kubernetes_audit: true
-container_manager: containerd
 etcd_events_cluster_enabled: true
 local_volume_provisioner_enabled: true
 etcd_deployment_type: host
@@ -25,6 +24,3 @@ metrics_server_kubelet_insecure_tls: true
 kube_token_auth: true
 kube_basic_auth: true
 enable_nodelocaldns: false
-
-kube_oidc_url: https://accounts.google.com/.well-known/openid-configuration
-kube_oidc_client_id: kubespray-example

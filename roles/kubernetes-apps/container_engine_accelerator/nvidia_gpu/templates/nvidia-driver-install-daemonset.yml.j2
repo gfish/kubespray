@@ -12,15 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: nvidia-driver-installer
   namespace: kube-system
 spec:
-  selector:
-    matchLabels:
-      name: nvidia-driver-installer
   template:
     metadata:
       labels:
